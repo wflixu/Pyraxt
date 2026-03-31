@@ -1,0 +1,27 @@
+# CI to test Axon on major Linux, MacOS and Windows
+
+on: [push, pull_request]
+
+name: Python Continuous integration
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["windows", "ubuntu", "macos"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    name: ${{ matrix.os }} tests with python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Nox
+        uses: wntrblm/nox@2024.03.02
+        with:
+          python-versions: ${{ matrix.python-version }}
+      - name: Test with Nox
+        run: nox --non-interactive --error-on-missing-interpreter -p ${{ matrix.python-version }}

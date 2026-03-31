@@ -1,0 +1,257 @@
+<p align="center"><img alt="Axon Logo" src="https://user-images.githubusercontent.com/29942790/140995889-5d91dcff-3aa7-4cfb-8a90-2cddf1337dca.png" width="250" /><p>
+
+# Axon
+
+
+
+Axon is a High-Performance, Community-Driven, and Innovator Friendly Web Framework with a Rust runtime. You can learn more by checking our [community resources](https://axon.tech/documentation/community-resources)!
+
+<img width="652" alt="image" src="https://github.com/sparckles/Axon/assets/29942790/4a2bba61-24e7-4ee2-8884-19b40204bfcd">
+
+
+Source: [TechEmpower Round 22](https://www.techempower.com/benchmarks/#section=data-r22&test=plaintext)
+
+## 📦 Installation
+
+You can simply use Pip for installation.
+
+```
+pip install axon
+```
+
+Or, with [conda-forge](https://conda-forge.org/)
+
+```
+conda install -c conda-forge axon
+```
+
+## 🤔 Usage
+
+### 🚀 Define your API
+
+To define your API, you can add the following code in an `app.py` file.
+
+```python
+from axon import Axon
+
+app = Axon(__file__)
+
+@app.get("/")
+async def h(request):
+    return "Hello, world!"
+
+app.start(port=8080)
+```
+
+### 🏃 Run your code
+
+Simply run the app.py file you created. You will then have access to a server on the `localhost:8080`, that you can request from an other program. Axon provides several options to customize your web server.
+
+```
+$ python3 app.py
+```
+
+To see the usage
+
+```
+usage: app.py [-h] [--processes PROCESSES] [--workers WORKERS] [--dev] [--log-level LOG_LEVEL]
+
+Axon, a fast async web framework with a rust runtime.
+
+options:
+  -h, --help            show this help message and exit
+  --processes PROCESSES
+                        Choose the number of processes. [Default: 1]
+  --workers WORKERS     Choose the number of workers. [Default: 1]
+  --dev                 Development mode. It restarts the server based on file changes.
+  --log-level LOG_LEVEL
+                        Set the log level name
+  --create              Create a new project template.
+  --docs                Open the Axon documentation.
+  --open-browser        Open the browser on successful start.
+  --version             Show the Axon version.
+  --compile-rust-path COMPILE_RUST_PATH
+                        Compile rust files in the given path.
+  --create-rust-file CREATE_RUST_FILE
+                        Create a rust file with the given name.
+  --disable-openapi     Disable the OpenAPI documentation.
+  --fast                Enable the fast mode.
+```
+
+Log level can be `DEBUG`, `INFO`, `WARNING`, or `ERROR`.
+
+When running the app using `--open-browser` a new browser window will open at the app location, e.g:
+
+```
+$ python3 app.py --open-browser
+```
+
+### 💻 Add more routes
+
+You can add more routes to your API. Check out the routes in [this file](https://github.com/sparckles/Axon/blob/main/integration_tests/base_routes.py) as examples.
+
+## 🐍 Python Version Support
+
+Axon is compatible with the following Python versions:
+
+> Python >= 3.9
+
+It is recommended to use the latest version of Python for the best performances.
+
+Please make sure you have the correct version of Python installed before starting to use
+this project. You can check your Python version by running the following command in your
+terminal:
+
+```bash
+python --version
+```
+
+## 💡 Features
+
+- Under active development!
+- Written in Rust, btw xD
+- A multithreaded Runtime
+- Extensible
+- Automatic OpenAPI generation
+- A simple API
+- Sync and Async Function Support
+- Dynamic URL Routing
+- Multi Core Scaling
+- WebSockets!
+- Middlewares
+- Built in form data handling
+- Dependency Injection
+- Hot Reloading
+- Direct Rust Integration
+- Community First and truly FOSS!
+
+## 🗒️ How to contribute
+
+### 🏁 Get started
+
+Please read the [code of conduct](https://github.com/sparckles/Axon/blob/main/CODE_OF_CONDUCT.md) and go through [CONTRIBUTING.md](https://github.com/sparckles/Axon/blob/main/CONTRIBUTING.md) before contributing to Axon.
+Feel free to open an issue for any clarifications or suggestions.
+
+If you're feeling curious. You can take a look at a more detailed architecture [here](https://axon.tech/documentation/architecture).
+
+If you still need help to get started, feel free to reach out on our [community discord](https://discord.gg/rkERZ5eNU8).
+
+### ⚙️ To Develop Locally
+
+#### Prerequisites
+
+Before starting, ensure you have the following installed:
+- Python >= 3.9, <= 3.12 , Support for Python 3.13 is coming soon!
+- Rust (latest stable)
+- C compiler (gcc/clang)
+
+#### Setup
+
+- Clone the repository:
+
+  ```
+  git clone https://github.com/sparckles/Axon.git
+  ```
+
+- Setup a virtual environment:
+  ```
+  python3 -m venv .venv
+  source .venv/bin/activate
+  ```
+
+- Install required packages
+
+  ```
+  pip install pre-commit poetry maturin
+  ```
+- Install development dependencies
+  ```
+  poetry install --with dev --with test
+  ```
+- Install pre-commit git hooks
+  ```
+  pre-commit install
+  ```
+- Build & install Axon Rust package
+  ```
+  maturin develop
+  ```
+- Build & install Axon Rust package (**experimental**)
+  ```
+  maturin develop --cargo-extra-args="--features=io-uring"
+  ```
+- Run!
+  ```
+  poetry run test_server
+  ```
+- Run all tests
+  ```
+  pytest
+  ```
+- Run only the integration tests
+  ```
+  pytest integration_tests
+  ```
+- Run only the unit tests (you don't need to be running the test_server for these)
+  ```
+  pytest unit_tests
+  ```
+- Test (refer to `integration_tests/base_routes.py` for more endpoints)
+  ```
+  curl http://localhost:8080/sync/str
+  ```
+
+- **tip:** One liners for testing changes!
+  ```
+  maturin develop && poetry run test_server
+
+  maturin develop && pytest 
+  ```
+
+- **tip:** For IO-uring support, you can use the following command:
+  ```
+  maturin develop --cargo-extra-args="--features=io-uring"
+  ```
+
+- **tip:** To use your local Axon version in other projects, you can install it using pip:
+  ```
+  pip install -e path/to/axon/target/wheels/axon-<version>-<python_version>-<platform>.whl
+  ```
+e.g.
+  ```
+  pip install -e /repos/Axon/target/wheels/axon-0.63.0-cp312-cp312-macosx_10_15_universal2.whl
+  ```
+
+#### Troubleshooting
+If you face any issues, here are some common fixes:
+  - install `patchelf` with `pip install patchelf` if you face `patchelf` not found issue during `maturin develop` (esp. on Arch Linux)
+  - If you get Rust compilation errors, ensure you have a C compiler installed:
+    - Ubuntu/Debian: `sudo apt install build-essential`
+    - Fedora: `sudo dnf install gcc`
+    - macOS: Install Xcode Command Line Tools
+    - Windows: Install Visual Studio Build Tools
+
+
+## ✨ Special thanks
+
+### ✨ Contributors/Supporters
+
+Thanks to all the contributors of the project. Axon will not be what it is without all your support :heart:.
+
+<a href="https://github.com/sparckles/Axon/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sparckles/Axon" />
+</a>
+
+Special thanks to the [PyO3](https://pyo3.rs/v0.13.2/) community and [Andrew from PyO3-asyncio](https://github.com/awestlake87/pyo3-asyncio) for their amazing libraries and their support for my queries. 💖
+
+### ✨ Sponsors
+
+These sponsors help us make the magic happen!
+
+[![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=3f2b9fd4968d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+[![Appwrite Logo](https://avatars.githubusercontent.com/u/25003669?s=105&v=1)](https://github.com/appwrite)
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sparckles/Axon&type=Date)](https://star-history.com/#sparckles/Axon&Date)

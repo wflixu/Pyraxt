@@ -1,0 +1,62 @@
+.python-version
+/target
+
+# ignore pre compiled binaries
+*.so
+dist/
+
+#python cache
+*__pycache__
+*tags
+
+# DS_Store
+*.DS_Store
+.vscode
+
+# pycharm
+.idea
+
+# python venv
+.venv
+venv
+axon.code-workspace
+hello_axon.py
+axon.env
+
+# nox
+.nox/
+
+# new docs dependencies
+# dependencies
+docs_src/node_modules
+docs_src/.pnp
+docs_src/.pnp.js
+
+# testing
+docs_src/coverage
+
+# next.js
+docs_src/.next/
+docs_src/out/
+
+# production
+docs_src/build
+
+# misc
+docs_src/.DS_Store
+docs_src/*.pem
+
+# debug
+docs_src/npm-debug.log*
+docs_src/yarn-debug.log*
+docs_src/yarn-error.log*
+docs_src/.pnpm-debug.log*
+
+# local env files
+docs_src/.env*.local
+
+# vercel
+docs_src/.vercel
+
+# generated files
+docs_src/public/rss/
